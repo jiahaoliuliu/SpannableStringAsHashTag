@@ -1,9 +1,11 @@
 package com.jiahaoliuliu.spannablestringashashtag;
 
 import android.content.Context;
+import android.support.v4.content.ContextCompat;
 import android.text.Spanned;
 import android.text.TextPaint;
 import android.text.style.ClickableSpan;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -13,30 +15,22 @@ import android.widget.Toast;
  */
 public class HashTag extends ClickableSpan {
 
+    private static final String TAG = "HashTag";
     private Context mContext;
-
-    private TextPaint mTextPain;
 
     public HashTag(Context context) {
         super();
-        this.mContext = context;
+        mContext = context;
     }
 
     @Override
     public void updateDrawState(TextPaint ds) {
-        mTextPain = ds;
-        ds.setColor(ds.linkColor);
-        ds.setARGB(255, 30, 144, 255);
+//        ds.setColor(ds.linkColor);
+        ds.setColor(mContext.getResources().getColor(R.color.primary));
     }
 
     @Override
     public void onClick(View widget) {
-        TextView tv = (TextView) widget;
-        Spanned s = (Spanned) tv.getText();
-        int start = s.getSpanStart(this);
-        int end = s.getSpanEnd(this);
-        String theWord = s.subSequence(start + 1, end).toString();
-        Toast.makeText(mContext, String.format("Tags for tags: %s", theWord), Toast.LENGTH_LONG).show();
+        throw new IllegalStateException("You must override onclick method");
     }
-
 }
